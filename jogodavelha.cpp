@@ -1,134 +1,133 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-void nickname(char nome[50]){
-	printf("\t--------Jogo da velha--------\n\n\n\n\n");
+#include <conio.h>
+#include <string.h>
+void nickname(char nome[11]){
+	system("color 0a");
+	printf("\t\t%s\n",nome);
 }
 
-void tabuleiro(char casas2[3][3]){
-
-	printf("\n\n\n\t\t %c | %c | %c \n",casas2[0][0],casas2[0][1],casas2[0][2]);
+void tabuleiro(char t[3][3]){
+	printf("\t============================\n");
+	printf("\n\n\n\t\t %c | %c | %c \n",t[0][0],t[0][1],t[0][2]);
   	printf("\t\t-----------\n");
-  	printf("\t\t %c | %c | %c \n",casas2[1][0],casas2[1][1],casas2[1][2]);	   	  
+  	printf("\t\t %c | %c | %c \n",t[1][0],t[1][1],t[1][2]);	   	  
  	printf("\t\t-----------\n");
- 	printf("\t\t %c | %c | %c \n\n\n\n\n\n",casas2[2][0],casas2[2][1],casas2[2][2]);
+ 	printf("\t\t %c | %c | %c \n\n\n\n\n\n",t[2][0],t[2][1],t[2][2]);
+	printf("\t============================\n\n");
 }
 
 int main(){
 	
-	char casas[3][3] = { {'1','2','3'},
-		 			     {'4','5','6'},
-		 			     {'7','8','9'}};
-	
-	char nome[50];
+	char tab[3][3];
+	char nome[11] = "Velha Game";
 	nickname(nome);
-	int contador_jogadas,linha,coluna,i,j;
-	int vez = 0;
-	char resposta;
+	int cont,linha,coluna;
+	int jogada = 0;
+	char confirmar;
 	
 	do{
-	   contador_jogadas = 1;
-	   		for(i = 0; i<=2; i++){
-	   			for(j=0; j<=2; j++){            //ZERANDO O TABULEIRO
-	   				casas[i][j] = ' ';
+	   cont = 1;
+	   		for(int i=0; i<=2; i++){
+	   			for(int j=0; j<=2; j++){            //ZERAR O TABULEIRO
+	   				tab[i][j] = ' ';
 				   }
 			   }
 		do{
-			tabuleiro(casas);
-			if(vez%2==0){
-				printf("\tJogador X\n");
+			tabuleiro(tab);
+			if(jogada%2==0){
+				printf("\tVez do primeiro jogador..\n\n\n");
 			}
 			else{
-				printf("\tJogador O\n");
+				printf("\tVez do segundo jogador..\n\n\n");
 			}
-			printf("\tDigite a linha: ");
+			printf("\tInsira a linha e coluna:\n");
 			scanf("%d",&linha);
-			printf("\tDigite a coluna: ");
 			scanf("%d",&coluna);
 			
-			if(linha < 1 || coluna < 1 || linha > 3 || coluna > 3){//JOGADAS INV¡LIDAS
-					 linha = 0 ;	//JOGADA INV¡LIDA
-					 coluna = 0;	//JOGADA INV¡LIDA
+			if(linha < 1 || coluna < 1 || linha > 3 || coluna > 3){//JOGADAS INV√ÅLIDAS
+					 linha = 0 ;	//JOGADA INV√ÅLIDA
+					 coluna = 0;	//JOGADA INV√ÅLIDA
 			}
-			else if(casas[linha-1][coluna-1] != ' '){//JOGADAS INV¡LIDAS
-				linha = 0;		// SE ELE PREENCHER CASA OCUPADA , INV¡LIDO
-				coluna = 0;		// PREENCHENDO CASA OCUPADA, INV¡LIDO
+			else if(tab[linha-1][coluna-1] != ' '){//JOGADAS INV√ÅLIDAS
+				linha = 0;		// SE ELE PREENCHER CASA OCUPADA , INV√ÅLIDO
+				coluna = 0;		// PREENCHENDO CASA OCUPADA, INV√ÅLIDO
 			}
-			else{  //JOGADA V¡LIDA                     //LINHA -1 E COLUNA -1, PQ COME«AM EM ZERO , CASAS[0][0]
-				if(vez%2 == 0){
-						 casas[linha-1][coluna-1] = 'X';	
+			else{  //JOGADA V√ÅLIDA                     //LINHA -1 E COLUNA -1, PQ COME√áAM EM ZERO , CASAS[0][0]
+				if(jogada%2 == 0){
+						 tab[linha-1][coluna-1] = 'X';	
 						  }
 				else{
-	  			  		  casas[linha-1][coluna-1] = 'O';
+	  			  		  tab[linha-1][coluna-1] = 'O';
 			}
-			vez++;
-		 	contador_jogadas++;
+				jogada++;
+		 		cont++;
 			} 
-			//CONDI«’ES DE VITORIA DO JOGADOR X
-			if(casas[0][0] == 'X' && casas[0][1] == 'X' && casas[0][2] == 'X'){
-				contador_jogadas = 11;  // pra encerrar o laÁo
+			//Vitoria do primeiro jogador
+			if(tab[0][0] == 'X' && tab[0][1] == 'X' && tab[0][2] == 'X'){
+				cont = 11;  // pra encerrar o la√ßo
 			}
-			if(casas[1][0] == 'X' && casas[1][1] == 'X' && casas[1][2] == 'X'){
-				contador_jogadas = 11;
+			if(tab[1][0] == 'X' && tab[1][1] == 'X' && tab[1][2] == 'X'){
+				cont = 11;
 			}
-			if(casas[2][0] == 'X' && casas[2][1] == 'X' && casas[2][2] == 'X'){
-				contador_jogadas = 11;
+			if(tab[2][0] == 'X' && tab[2][1] == 'X' && tab[2][2] == 'X'){
+				cont = 11;
 			}
-			if(casas[0][0] == 'X' && casas[1][0] == 'X' && casas[2][0] == 'X'){
-				contador_jogadas = 11;
+			if(tab[0][0] == 'X' && tab[1][0] == 'X' && tab[2][0] == 'X'){
+				cont = 11;
 			}
-			if(casas[0][1] == 'X' && casas[1][1] == 'X' && casas[2][1] == 'X'){
-				contador_jogadas = 11;
+			if(tab[0][1] == 'X' && tab[1][1] == 'X' && tab[2][1] == 'X'){
+				cont = 11;
 			}
-			if(casas[0][2] == 'X' && casas[1][2] == 'X' && casas[2][2] == 'X'){
-				contador_jogadas = 11;
+			if(tab[0][2] == 'X' && tab[1][2] == 'X' && tab[2][2] == 'X'){
+				cont = 11;
 			}
-			if(casas[0][0] == 'X' && casas[1][1] == 'X' && casas[2][2] == 'X'){
-				contador_jogadas = 11;
+			if(tab[0][0] == 'X' && tab[1][1] == 'X' && tab[2][2] == 'X'){
+				cont = 11;
 			}
-			if(casas[0][2] == 'X' && casas[1][1] == 'X' && casas[2][0] == 'X'){
-				contador_jogadas = 11;
+			if(tab[0][2] == 'X' && tab[1][1] == 'X' && tab[2][0] == 'X'){
+				cont = 11;
 			}
 	
-			//CONDI«’ES DE VITORIA DO JOGADOR O
-				if(casas[0][0] == 'O' && casas[0][1] == 'O' && casas[0][2] == 'O'){
-				contador_jogadas = 12;  // pra encerrar o laÁo
+			//Vitoria do segundo jogador
+				if(tab[0][0] == 'O' && tab[0][1] == 'O' && tab[0][2] == 'O'){
+					cont = 12;  // pra encerrar o la√ßo
 			}
-			if(casas[1][0] == 'O' && casas[1][1] == 'O' && casas[1][2] == 'O'){
-				contador_jogadas = 12;
+				if(tab[1][0] == 'O' && tab[1][1] == 'O' && tab[1][2] == 'O'){
+					cont = 12;
 			}
-			if(casas[2][0] == 'O' && casas[2][1] == 'O' && casas[2][2] == 'O'){
-				contador_jogadas = 12;
+				if(tab[2][0] == 'O' && tab[2][1] == 'O' && tab[2][2] == 'O'){
+					cont = 12;
 			}
-			if(casas[0][0] == 'O' && casas[1][0] == 'O' && casas[2][0] == 'O'){
-				contador_jogadas = 12;
+				if(tab[0][0] == 'O' && tab[1][0] == 'O' && tab[2][0] == 'O'){
+					cont = 12;
 			}
-			if(casas[0][1] == 'O' && casas[1][1] == 'O' && casas[2][1] == 'O'){
-				contador_jogadas = 12;
+				if(tab[0][1] == 'O' && tab[1][1] == 'O' && tab[2][1] == 'O'){
+					cont = 12;
 			}
-			if(casas[0][2] == 'O' && casas[1][2] == 'O' && casas[2][2] == 'O'){
-				contador_jogadas = 12;
+				if(tab[0][2] == 'O' && tab[1][2] == 'O' && tab[2][2] == 'O'){
+					cont = 12;
 			}
-			if(casas[0][0] == 'O' && casas[1][1] == 'O' && casas[2][2] == 'O'){
-				contador_jogadas = 12;
+				if(tab[0][0] == 'O' && tab[1][1] == 'O' && tab[2][2] == 'O'){
+					cont = 12;
 			}
-			if(casas[0][2] == 'O' && casas[1][1] == 'O' && casas[2][0] == 'O'){
-				contador_jogadas = 12;
+				if(tab[0][2] == 'O' && tab[1][1] == 'O' && tab[2][0] == 'O'){
+					cont = 12;
 			}
-		}while(contador_jogadas <= 9);
-		tabuleiro(casas);
-			if(contador_jogadas==10){
-				printf("\tJogo empatado\n");
+		}while(cont <= 9);
+		
+				if(cont==10){
+					printf("\tO jogo teve um empate!\n");
 			}
-			if(contador_jogadas==11){
-				printf("\tJogador X venceu!\n");
+				if(cont==11){
+					printf("\tO primeiro jogador venceu!\n");
 			}
-			if(contador_jogadas==12){
-				printf("\tJogador O venceu!\n");
+				if(cont==12){
+					printf("\tO segundo jogador venceu!\n");
 			}
-		printf("\tVoce deseja jogar novamente?\n");
-		scanf("%s",&resposta);		
-	}while(resposta == 's');
+		printf("\tVoce quer jogar novamente? Insira 's' para continuar ou qualquer letra pra sair\n");
+		scanf("%s",&confirmar);		
+	}while(confirmar == 's');
 	
 	system("pause");
 	return 0;
