@@ -53,7 +53,7 @@ int main(){
 				linha = 0;		// SE ELE PREENCHER CASA OCUPADA , INVÁLIDO
 				coluna = 0;		// PREENCHENDO CASA OCUPADA, INVÁLIDO
 			}
-			else{  //JOGADA VÁLIDA                     //LINHA -1 E COLUNA -1, PQ COMEÇAM EM ZERO , CASAS[0][0]
+			else{  //JOGADA VÁLIDA                     //LINHA -1 E COLUNA -1, PQ COMEÇAM EM ZERO , tab[0][0]
 				if(jogada%2 == 0){
 						 tab[linha-1][coluna-1] = 'X';	
 						  }
